@@ -18,9 +18,9 @@ weatherForm.addEventListener('submit',(e) => {
 			}
 			else
 			{
-				messageOne.textContent = apidata.data.place;
-				messageTwo.textContent = 'Teparature is '+apidata.data.currentTemparature+' ^0f outside and weather type is '+apidata.data.countryDescription;
-				console.log(apidata)
+				messageOne.textContent = apidata.data.place,apidata.data.countryName;
+				/*messageTwo.textContent = 'Teparature is '+apidata.data.currentTemparature+' ^0f outside and weather type is '+apidata.data.countryDescription;*/
+				messageTwo = apidata.data.countryDescription+'through out the day.It is currently '+apidata.data.currentTemparature' degree out.wind is blowing at a speed of'+apidata.data.windSpeed+' towards '+apidata.data.windDirection+'.Current humidity is'+currentHumidity+' degree';
 			}
 		})
 	})
