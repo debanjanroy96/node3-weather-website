@@ -10,8 +10,7 @@ weatherForm.addEventListener('submit',(e) => {
 	
 	messageOne.textContent = 'Loading...'
 	messageTwo.textContent = ''
-	
-	fetch('/weather?address='+location).then((response) => {
+	fetch('http://localhost:3000/weather?address='+location).then((response) => {
 		response.json().then((apidata) => {
 			if(apidata.error)
 			{
@@ -19,8 +18,9 @@ weatherForm.addEventListener('submit',(e) => {
 			}
 			else
 			{
-				messageOne.textContent = apidata.data.name
-				messageTwo.textContent = apidata.data.description			
+				messageOne.textContent = apidata.data.place;
+				messageTwo.textContent = 'Teparature is '+apidata.data.currentTemparature+' ^0f outside and weather type is '+apidata.data.countryDescription;
+				console.log(apidata)
 			}
 		})
 	})

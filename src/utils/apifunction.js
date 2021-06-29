@@ -1,7 +1,7 @@
 const request = require('postman-request')
 const geocode = (address,callback) => {
 	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+encodeURIComponent(address)+'.json?access_token=pk.eyJ1IjoiZGViYW5qYW5yb3kiLCJhIjoiY2tqczB5ank1MXhyNzMwbHk2OHg2M3N6MyJ9.Pzpv0KMoRr3J7JDmFb-qUA&limit=1'
-	request({url:url,json:true},(error,{body}) => {
+	request({url,json:true},(error,{body}) => {
 		if(error)
 		{
 			callback('Unable to connect location services',undefined)
@@ -27,7 +27,7 @@ const geocode = (address,callback) => {
 }
 const weather = (latitude,logitude,units,callback) => {
 	const url='http://api.weatherstack.com/current?access_key=70d11eca8756d54db1e078808df32f65&query='+logitude+','+latitude+'&units='+units
-	request({url:url,json:true},(error,{body}) => {
+	request({url,json:true},(error,{body}={}) => {
 		if(error)
 		{
 			callback('Unable to connect weather api',undefined)	
@@ -39,9 +39,14 @@ const weather = (latitude,logitude,units,callback) => {
 		else
 		{
 			callback(undefined,{
-				name:body.location.name,
-				country:body.location.country,
-				description:body.current.weather_descriptions[0]
+				place:body.location.name,
+				countryName:body.location.country,
+				countryDescription:body.current.weather_descriptions[0],
+				currentTemparature:body.current.temperature,
+				windSpeed:body.current.wind_speed,
+				windDirection:body.current.wind_dir,
+				currentHumidity:body.current.humidity,
+				url
 			})
 		}
 	})
