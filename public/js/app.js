@@ -14,13 +14,16 @@ weatherForm.addEventListener('submit',(e) => {
 		response.json().then((apidata) => {
 			if(apidata.error)
 			{
-				messageOne.textContent = apidata.error
+				messageOne.textContent = apidata.error;
+			}
+			else if(apidata.data=="<html>\r\n<head><title>520 Origin Error</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>520 Origin Error</h1></center>\r\n<hr><center>cloudflare-nginx</center>\r\n</body>\r\n</html>\r\n")
+			{
+				messageOne.textContent = "Something went wrong";
 			}
 			else
 			{
-				messageOne.textContent = apidata.data.place,apidata.data.countryName;
-				/*messageTwo.textContent = 'Teparature is '+apidata.data.currentTemparature+' ^0f outside and weather type is '+apidata.data.countryDescription;*/
-				messageTwo = apidata.data.countryDescription+'through out the day.It is currently '+apidata.data.currentTemparature' degree out.wind is blowing at a speed of'+apidata.data.windSpeed+' towards '+apidata.data.windDirection+'.Current humidity is'+currentHumidity+' degree';
+				messageOne.textContent = apidata.data.place+","+apidata.data.countryName;
+				messageTwo.textContent = apidata.data.countryDescription+' through out the day.It is currently  '+apidata.data.currentTemparature+' degree out.wind is blowing at a speed of '+apidata.data.windSpeed+' towards '+apidata.data.windDirection+'.Current humidity is '+apidata.data.currentHumidity+' degree';
 			}
 		})
 	})
