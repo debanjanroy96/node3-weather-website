@@ -9,6 +9,9 @@ const publicDirectory=path.join(__dirname,'../public')
 //console.log(publicDirectory)
 const viewsPath=path.join(__dirname,'./templates/views')
 const partialsPath=path.join(__dirname,'./templates/partials')
+
+const port = process.env.PORT || 3000
+
 const app=express()
 
 //set up static directory to server
@@ -87,6 +90,6 @@ res.render('404',{
 					error_message:'page not found'
 				})	
 })
-app.listen('3000',() => {
-	console.log('server is up on port 3000')
+app.listen(port,() => {
+	console.log('server is up on port '+port)
 })
